@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { darkTheme } from '@/utils/muiTheme';
 
-const App = () => {
-  const [data, setData] = useState({ info: '京程一灯' });
-  console.log('🐻 App component rendered');
+// import ChatGPTComponent from './components/ChatGPTComp';
+import McpComponent from '@components/McpComp';
+
+function App() {
   return (
-    <>
-      <h1
-        className="text-4xl text-[#09F]"
-        onClick={() => {
-          setData({ info: '京程一灯' });
-        }}
-      >
-        {data.info}
-      </h1>
-    </>
+    <ThemeProvider theme={darkTheme}>
+      <McpComponent />
+    </ThemeProvider>
   );
-};
+}
+
 App.whyDidYouRender = true; // Enable WDYR for this component
 export default App;

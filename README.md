@@ -35,10 +35,13 @@ pnpm install
 
 ```bash
 # 启动开发服务器（带热重载）
-pnpm run client:server
+pnpm run client:serve
 
-# 或者仅构建开发版本
+# 构建开发版本
 pnpm run client:dev
+
+# 构建生产版本
+pnpm run client:prod
 ```
 
 开发服务器将在 `http://localhost:3003` 启动（端口可能不同，请查看终端输出）。
@@ -57,9 +60,6 @@ pnpm run client:prod
 ```bash
 # 运行单元测试
 pnpm test
-
-# 运行 UI 回归测试
-pnpm run test:uidiff
 ```
 
 ## 🔧 代码质量
@@ -83,26 +83,6 @@ pnpm run lint:fix
 - **pre-commit**: 自动运行 ESLint 检查和修复
 - **commit-msg**: 检查提交信息格式（如果配置了 commitlint）
 
-## 📁 项目结构
-
-```
-yd-ai-dapp/
-├── src/                 # 源代码目录
-│   ├── components/      # React 组件
-│   ├── hooks/          # 自定义 Hooks
-│   ├── utils/          # 工具函数
-│   ├── types/          # TypeScript 类型定义
-│   └── index.tsx       # 应用入口
-├── public/             # 静态资源
-├── dist/               # 构建输出目录
-├── .husky/             # Git hooks 配置
-├── webpack.config.js   # Webpack 配置
-├── tailwind.config.js  # Tailwind CSS 配置
-├── tsconfig.json       # TypeScript 配置
-├── .eslintrc.js        # ESLint 配置
-└── package.json        # 项目配置
-```
-
 ## 🔌 MetaMask 集成
 
 项目集成了 MetaMask SDK，支持：
@@ -119,7 +99,7 @@ import { MetaMaskSDK } from '@metamask/sdk';
 
 const sdk = new MetaMaskSDK({
   dappMetadata: {
-    name: 'YD AI DApp',
+    name: 'AI DApp',
     url: window.location.href,
   }
 });
@@ -222,6 +202,6 @@ chore: 构建过程或辅助工具的变动
 如有问题或建议，请通过以下方式联系：
 
 - 创建 Issue
-- 发送邮件到：[yuanzhijia198810@gmail.com]
+- 发送邮件到：[harlanhxh@gmail.com]
 
 ---
