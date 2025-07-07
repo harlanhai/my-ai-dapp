@@ -1,13 +1,12 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { darkTheme } from '@/utils/muiTheme';
 
-// import ChatGPTComponent from './components/ChatGPTComp';
-import McpComponent from '@components/McpComp';
+import Home from '@pages/Home/Home'
 
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
-      <McpComponent />
+      <Home />
     </ThemeProvider>
   );
 }

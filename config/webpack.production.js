@@ -31,6 +31,12 @@ module.exports = {
       }),
     ],
   },
+  // 排除 React 相关依赖
+  externals: {
+    'react': 'React',
+    'react-dom/client': 'ReactDOMClient', 
+    // 'react-dom': 'ReactDOM',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: "DApp",
@@ -41,6 +47,24 @@ module.exports = {
         collapseWhitespace: true,
         removeAttributeQuotes: true,
       },
+      // React 19 使用ESM模块，通过esm.sh CDN引入
+      templateParameters: {
+        REACT_CDN: `
+          <script type="importmap">
+          {
+            "imports": {
+              "react": "https://esm.sh/react@19.1.0",
+              "react-dom/client": "https://esm.sh/react-dom@19.1.0/client",
+            }
+          }
+          </script>
+        `
+        // REACT_CDN: `
+        //   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        //   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        //   <script crossorigin src="https://unpkg.com/react-router-dom@6/dist/umd/react-router-dom.production.min.js"></script>
+        // `
+      }
     }),
   ],
 };

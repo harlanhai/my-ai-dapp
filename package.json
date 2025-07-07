@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "client:dev": "webpack --mode development",
-    "client:serve": "webpack serve --mode development",
-    "client:prod": "webpack --mode production",
-    "jest:test": "jest",
+    "dev": "webpack --mode development",
+    "serve": "webpack serve --mode development",
+    "prod": "webpack --mode production",
+    "test": "jest",
     "jest:ui": "majestic",
     "prepare": "husky"
   },
@@ -22,10 +22,15 @@
     "@metamask/sdk": "^0.33.0",
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
+    "axios": "^1.10.0",
     "graphql": "^16.11.0",
+    "immer": "^10.1.1",
+    "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-markdown": "^10.1.0"
+    "react-markdown": "^10.1.0",
+    "viem": "^2.31.6",
+    "wagmi": "^2.15.6"
   },
   "devDependencies": {
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
