@@ -56,6 +56,7 @@ const baseConfig = {
       '@constants': resolve('src/constants'),
       '@connections': resolve('src/connections'),
       '@abis': resolve('src/abis'),
+      '@apis': resolve('src/apis'),
       '@types': resolve('src/types'),
       '@store': resolve('src/store'),
     },

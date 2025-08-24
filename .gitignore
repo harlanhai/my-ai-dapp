@@ -6,3 +6,8 @@ node_modules
 dist/
 /build
 build/
+
+/cypress/screenshots
+/cypress/videos
+
+.claude/

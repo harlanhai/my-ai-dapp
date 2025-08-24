@@ -1,0 +1,89 @@
+import loadable from "@loadable/component";
+import Layout from "@components/Layout";
+import { RouteObject } from "react-router-dom";
+
+// 懒加载页面组件
+const Home = loadable(/* #__LOADABLE__ */ () => import("@pages/Home"));
+
+// Agent相关页面
+const Agents = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents"));
+const AgentDetail = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents/AgentDetail"));
+const AgentForm = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents/AgentForm"));
+
+// Job相关页面  
+// const Jobs = loadable(/* #__LOADABLE__ */ () => import("@/pages/Jobs/ListPage"), null);
+// const JobDetail = loadable(/* #__LOADABLE__ */ () => import("@pages/Jobs/DetailPage/JobDetail"), null);
+// const JobForm = loadable(/* #__LOADABLE__ */ () => import("@pages/Jobs/CreatePage/JobForm"), null);
+
+// 404页面
+const NotFound = () => (
+  <div style={{ textAlign: "center", padding: "2rem" }}>
+    <h1>404 - 页面未找到</h1>
+    <p>抱歉，您访问的页面不存在。</p>
+    <a href="/" style={{ color: "#3b82f6" }}>
+      返回首页
+    </a>
+  </div>
+);
+
+const routes: RouteObject[] = [
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      // 首页
+      {
+        index: true,
+        element: <Home />,
+      },
+
+      // Agent管理模块
+      {
+        path: "agents",
+        children: [
+          {
+            index: true,
+            element: <Agents />,
+          },
+          {
+            path: "new",
+            element: <AgentForm />,
+          },
+          {
+            path: ":id",
+            element: (
+              <AgentDetail
+                open={true}
+                onClose={() => {}}
+                agent={null}
+              />
+            ),
+          },
+          {
+            path: ":id/edit",
+            element: <AgentForm />,
+          },
+        ],
+      },
+       
+      // 其他页面
+      {
+        path: "about",
+        element: (
+          <div style={{ padding: "2rem" }}>
+            <h1>关于 AgentFlow</h1>
+            <p>AgentFlow 是一个智能代理管理平台 - 待完善</p>
+          </div>
+        ),
+      },
+
+      // 404页面 - 放在最后
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+];
+
+export default routes;

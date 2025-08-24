@@ -8,7 +8,9 @@ type Action = {
   updateAddress: (address: State['address']) => void;
 }
 
-export const useUserStore = create<State & Action>((set) => ({
+const useUserStore = create<State & Action>((set) => ({
   address: undefined,
   updateAddress: (address) => set(() => ({address: address}))
 }))
+
+export { useUserStore };

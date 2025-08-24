@@ -32,10 +32,14 @@ module.exports = {
     ],
   },
   // 排除 React 相关依赖
+  // 1. 减少打包体积，加快构建速度 
+  // 2. 使用 CDN 加载，提升访问速度
+  // 3. 减少服务器流量与压力
+  // 4. 支持灵活的版本管理
+  // 5. 便于 SSR/微前端场景
   externals: {
     'react': 'React',
-    'react-dom/client': 'ReactDOMClient', 
-    // 'react-dom': 'ReactDOM',
+    'react-dom': 'ReactDOM',
   },
   plugins: [
     new HtmlWebpackPlugin({

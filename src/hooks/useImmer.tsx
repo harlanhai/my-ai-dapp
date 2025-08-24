@@ -27,9 +27,11 @@ export function useImmer<T>(initialValue: T){
     freeze(typeof initialValue === 'function' ? initialValue() : initialValue, true)
   )
   return [val, useCallback((updater: T | DraftFunction<T>)=>{
+    // 如果 updater 是函数类型，使用 produce 处理
     if(typeof updater === 'function') {
       updateValue(produce(updater as DraftFunction<T>));
     } else {
+      // 否则直接更新值
       updateValue(freeze(updater))
     }
   }, [])]

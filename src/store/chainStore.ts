@@ -8,7 +8,9 @@ type Action = {
   updateIsLinking: (isLinking: State['isLinking']) => void;
 };
 
-export const useChainStore = create<State & Action>((set) => ({
+const useChainStore = create<State & Action>((set) => ({
   isLinking: false,
   updateIsLinking: (isLinking) => set(() => ({ isLinking: isLinking })),
 }));
+
+export { useChainStore };

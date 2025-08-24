@@ -15,7 +15,10 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    static: join(__dirname, '../dist'),
+    static: [
+      join(__dirname, '../dist'),
+      join(__dirname, '../public')
+    ],
     hot: true,
     port: port,
     // proxy: {
