@@ -74,7 +74,9 @@ class AgentService {
         totalJobsCompleted: 156,
         createdAt: new Date("2025-01-01"),
         updatedAt: new Date("2025-01-15"),
-        walletAddress: "0x742d35Cc6639C0532fEb17f6fB466C8fd3b00C36"
+        walletAddress: "0x742d35Cc6639C0532fEb17f6fB466C8fd3b00C36",
+        isFree: false,
+        price: 0,
       },
       {
         id: "2",
@@ -93,7 +95,9 @@ class AgentService {
         totalJobsCompleted: 89,
         createdAt: new Date("2025-01-02"),
         updatedAt: new Date("2025-01-15"),
-        walletAddress: "0x8ba1f109551bD432803012645Hac136c34774567"
+        walletAddress: "0x8ba1f109551bD432803012645Hac136c34774567",
+        isFree: true,
+        price: 1,
       },
       {
         id: "3",
@@ -112,7 +116,9 @@ class AgentService {
         totalJobsCompleted: 234,
         createdAt: new Date("2024-12-15"),
         updatedAt: new Date("2025-01-10"),
-        walletAddress: "0x2f37d1c3b5d982a14e7e678f2b4a9e6d1c8b9a7c"
+        walletAddress: "0x2f37d1c3b5d982a14e7e678f2b4a9e6d1c8b9a7c",
+        isFree: true,
+        price: 2,
       },
       {
         id: "4",
@@ -131,7 +137,9 @@ class AgentService {
         totalJobsCompleted: 127,
         createdAt: new Date("2024-11-20"),
         updatedAt: new Date("2025-01-14"),
-        walletAddress: "0x9c8e7f6d5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e"
+        walletAddress: "0x9c8e7f6d5b4a3f2e1d0c9b8a7f6e5d4c3b2a1f0e",
+        isFree: true,
+        price: 3,
       },
       {
         id: "5",
@@ -150,7 +158,9 @@ class AgentService {
         totalJobsCompleted: 98,
         createdAt: new Date("2024-12-01"),
         updatedAt: new Date("2025-01-13"),
-        walletAddress: "0x5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d"
+        walletAddress: "0x5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d",
+        isFree: true,
+        price: 4.00,
       }
     ];
   }

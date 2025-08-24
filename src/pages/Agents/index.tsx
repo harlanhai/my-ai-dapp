@@ -42,11 +42,11 @@ const Agents = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [open, setOpen] = useState(false);
-  const [currentAgent, setCurrentAgent] = useState<Agent>()
-  const address = useUserStore((state) => state.address);
+  const [currentAgent, setCurrentAgent] = useState<Agent | null>(null);
+  const address = useUserStore(state => state.address);
 
   // 获取 store
-  const isLinking: boolean = useChainStore((state: { isLinking: boolean }) => state.isLinking)
+  const isLinking: boolean = useChainStore((state: { isLinking: boolean }) => state.isLinking);
   // 获取 agents 列表
   const { data: agentRes } = useQuery({
     queryKey: [PrefetchKeys.AGENTS, currentPage, pageSize],
@@ -83,7 +83,7 @@ const Agents = () => {
     }
   };
 
-  const handleKeyPress = (event: KeyboardEvent) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSearch();
     }
@@ -93,11 +93,11 @@ const Agents = () => {
   const openDetail = (agent: Agent) => {
     setCurrentAgent(agent);
     setOpen(true);
-  }
+  };
 
   // 单个 agent 组件
-  const AgentCard = (agent: Agent) => {
-    const IconComponent = iconMap[agent.icon] || MessageSquare;
+  const AgentCard = ({ agent }: { agent: Agent }) => {
+    const IconComponent = MessageSquare;
 
     return (
       <div
@@ -122,7 +122,7 @@ const Agents = () => {
             </div>
           </div>
           {/* 分类 */}
-          <div className="text-sm text-blue-400 font-medium">{agent.category}</div>
+          {/* <div className="text-sm text-blue-400 font-medium">{agent.category}</div> */}
         </div>
 
         {/* 描述 */}
@@ -130,8 +130,11 @@ const Agents = () => {
 
         {/* 标签 */}
         <div className="flex flex-wrap gap-1 mb-3">
-          {agent.tags.slice(0, 3).map((tag, index) => (
-            <span key={index} className="px-2 py-1 bg-gray-700 text-xs font-medium text-gray-300 rounded-lg">
+          {agent.tags?.slice(0, 3).map((tag, index) => (
+            <span
+              key={index}
+              className="px-2 py-1 bg-gray-700 text-xs font-medium text-gray-300 rounded-lg"
+            >
               {tag}
             </span>
           ))}
@@ -140,11 +143,17 @@ const Agents = () => {
         {/* 底部信息 */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {agent.isFree ? '' : <span className="text-xl font-bold text-white">{agent.price}</span>}
+            {agent.isFree ? (
+              ''
+            ) : (
+              <span className="text-xl font-bold text-white">{agent.price}</span>
+            )}
             <span className="text-xs text-gray-400">{agent.isFree ? '免费使用' : 'USDT/月'}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">{agent.isFree ? '免费使用' : '固定通用收费'}</span>
+            <span className="text-xs text-gray-400">
+              {agent.isFree ? '免费使用' : '固定通用收费'}
+            </span>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
               <span className="text-xs text-gray-300">合约</span>
@@ -164,8 +173,8 @@ const Agents = () => {
             type="text"
             placeholder="请输入搜索内容..."
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onChange={e => setSearchValue(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="w-full px-4 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
           />
         </div>
@@ -195,10 +204,7 @@ const Agents = () => {
 
       {/* 按行显示代理卡片 */}
       <div className="w-full mb-8 flex justify-start flex-wrap gap-4">
-        {agents &&
-          agents.map((agent) => (
-            <AgentCard key={agent.id} agent={agent} />
-          ))}
+        {agents && agents.map(agent => <AgentCard key={agent.id} agent={agent} />)}
       </div>
 
       {/* 分页组件 */}
@@ -212,7 +218,7 @@ const Agents = () => {
           上一页
         </button>
 
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
           <button
             key={page}
             onClick={() => handlePageChange(page)}

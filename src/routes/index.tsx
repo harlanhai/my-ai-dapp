@@ -1,26 +1,32 @@
-import loadable from "@loadable/component";
-import Layout from "@components/Layout";
-import { RouteObject } from "react-router-dom";
+import loadable from '@loadable/component';
+import Layout from '@components/Layout';
+import { RouteObject } from 'react-router-dom';
 
 // 懒加载页面组件
-const Home = loadable(/* #__LOADABLE__ */ () => import("@pages/Home"));
+const Home = loadable(/* #__LOADABLE__ */ () => import('@pages/Home'));
 
 // Agent相关页面
-const Agents = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents"));
-const AgentDetail = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents/AgentDetail"));
-const AgentForm = loadable(/* #__LOADABLE__ */ () => import("@pages/Agents/AgentForm"));
+const Agents = loadable(/* #__LOADABLE__ */ () => import('@pages/Agents'));
+const AgentDetail = loadable(/* #__LOADABLE__ */ () => import('@pages/Agents/AgentDetail'));
+const AgentForm = loadable(/* #__LOADABLE__ */ () => import('@pages/Agents/AgentForm'));
 
-// Job相关页面  
-// const Jobs = loadable(/* #__LOADABLE__ */ () => import("@/pages/Jobs/ListPage"), null);
-// const JobDetail = loadable(/* #__LOADABLE__ */ () => import("@pages/Jobs/DetailPage/JobDetail"), null);
-// const JobForm = loadable(/* #__LOADABLE__ */ () => import("@pages/Jobs/CreatePage/JobForm"), null);
+// Job相关页面
+const Jobs = loadable(/* #__LOADABLE__ */ () => import('@/pages/Jobs/ListPage'));
+const JobDetail = loadable(/* #__LOADABLE__ */ () => import('@pages/Jobs/DetailPage/JobDetail'));
+const JobForm = loadable(/* #__LOADABLE__ */ () => import('@pages/Jobs/CreatePage/JobForm'));
+
+// Wallet 页面
+const Wallet = loadable(/* #__LOADABLE__ */ () => import('@pages/Wallet/WalletDashboard'));
+
+import StackDemo from '@/pages/Wallet/StackDemo';
+import StackDemo2 from '@/pages/Wallet/StackDemo2';
 
 // 404页面
 const NotFound = () => (
-  <div style={{ textAlign: "center", padding: "2rem" }}>
+  <div style={{ textAlign: 'center', padding: '2rem' }}>
     <h1>404 - 页面未找到</h1>
     <p>抱歉，您访问的页面不存在。</p>
-    <a href="/" style={{ color: "#3b82f6" }}>
+    <a href="/" style={{ color: '#3b82f6' }}>
       返回首页
     </a>
   </div>
@@ -28,7 +34,7 @@ const NotFound = () => (
 
 const routes: RouteObject[] = [
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       // 首页
@@ -39,38 +45,69 @@ const routes: RouteObject[] = [
 
       // Agent管理模块
       {
-        path: "agents",
+        path: 'agents',
         children: [
           {
             index: true,
             element: <Agents />,
           },
           {
-            path: "new",
+            path: 'new',
             element: <AgentForm />,
           },
           {
-            path: ":id",
-            element: (
-              <AgentDetail
-                open={true}
-                onClose={() => {}}
-                agent={null}
-              />
-            ),
+            path: ':id',
+            element: <AgentDetail open={true} onClose={() => {}} agent={null} />,
           },
           {
-            path: ":id/edit",
+            path: ':id/edit',
             element: <AgentForm />,
           },
         ],
       },
-       
+      // Job管理模块
+      {
+        path: 'jobs',
+        children: [
+          {
+            index: true,
+            element: <Jobs />,
+          },
+          {
+            path: 'new',
+            element: <JobForm />,
+          },
+          {
+            path: ':id',
+            element: <JobDetail />,
+          },
+          {
+            path: ':id/edit',
+            element: <JobForm />,
+          },
+        ],
+      },
+
+      // Wallet 页面
+      {
+        path: 'wallet',
+        element: <Wallet />,
+      },
+      // 合约测试页面1
+      {
+        path: 'stackdemo',
+        element: <StackDemo />,
+      },
+      // 合约测试页面2
+      {
+        path: 'stackdemo2',
+        element: <StackDemo2 />,
+      },
       // 其他页面
       {
-        path: "about",
+        path: 'about',
         element: (
-          <div style={{ padding: "2rem" }}>
+          <div style={{ padding: '2rem' }}>
             <h1>关于 AgentFlow</h1>
             <p>AgentFlow 是一个智能代理管理平台 - 待完善</p>
           </div>
@@ -79,7 +116,7 @@ const routes: RouteObject[] = [
 
       // 404页面 - 放在最后
       {
-        path: "*",
+        path: '*',
         element: <NotFound />,
       },
     ],
